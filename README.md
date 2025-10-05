@@ -23,22 +23,30 @@ Roamio transforms NASA's satellite imagery and real-time weather data into an in
 ## ✨ Features
 
 ### 🛰️ Multi-Layer Satellite Data Visualization
-- **7 NASA GIBS data layers** with real-time updates:
-  - Sea Surface Temperature (SST)
-  - Aerosol Optical Depth (air quality)
-  - Land Surface Temperature (LST)
-  - Vegetation Health (NDVI)
-  - Snow Cover
-  - Active Fires
-  - Cloud Cover
-- Interactive layer switcher with opacity controls
-- Color-coded legends for data interpretation
+Powered by NASA's Global Imagery Browse Services (GIBS), Roamio provides access to **7 real-time Earth observation layers**:
+
+- **🌊 Sea Surface Temperature (MODIS Aqua)** - Ocean temperature mapping for marine conditions
+- **💨 Aerosol Optical Depth** - Air quality monitoring and pollution tracking
+- **🌡️ Land Surface Temperature** - Ground heat mapping for hiking and camping safety
+- **🌱 Vegetation Health (NDVI)** - Plant vitality index for landscape assessment
+- **❄️ Snow Cover** - Real-time snow depth and coverage for winter sports
+- **🔥 Active Fires** - Wildfire detection and tracking for safety alerts
+- **☁️ Cloud Cover** - Atmospheric conditions for photography and outdoor planning
+
+**Interactive Controls:**
+- Layer opacity sliders for custom visualization blending
+- Color-coded legends with measurement scales
+- Historical data access (2012-present for most layers)
+- 1km spatial resolution imagery
 
 ### 🛸 Orbital Pass Predictor
-- **ISS flyover times** for any location
-- Starlink constellation visibility
-- Other satellite pass predictions
-- Optimal viewing windows for astrophotography
+Never miss a satellite flyover with precise prediction algorithms:
+
+- **International Space Station (ISS)** - Exact flyover times, elevation angles, and visibility ratings
+- **Starlink Constellation** - Track SpaceX satellite trains for spectacular sightings
+- **Other LEO Satellites** - Hubble, Chinese Space Station, and more
+- **Astrophotography Planning** - Optimal viewing windows with brightness predictions
+- **Custom Date Selection** - Plan future observations up to 30 days ahead
 
 ### 🌤️ Weather Intelligence
 - Real-time weather analysis powered by Open-Meteo API
@@ -117,15 +125,41 @@ The built files will be in the `dist` directory.
 
 ## 🎯 How It Works
 
-1. **Select a Date** - Choose when you want to explore (historical data available)
-2. **Click the Map** - Select any location on Earth
-3. **View Analysis** - Get instant weather insights and trip suitability scores
-4. **Plan Better** - Make informed decisions about your outdoor activities
+### Step-by-Step Workflow
+1. **📅 Select a Date** - Choose any date from 2012 to present for historical analysis, or use today's date for current conditions
+2. **🗺️ Click the Map** - Click anywhere on Earth to analyze that location's environmental conditions
+3. **📊 View Satellite Layers** - Toggle between 7 NASA GIBS layers to see different environmental factors
+4. **🛸 Check Satellite Passes** - View upcoming ISS and satellite flyover times for your selected location
+5. **🌤️ Analyze Weather** - Review real-time weather data and trip suitability scores
+6. **✈️ Plan Better** - Make data-driven decisions about your outdoor adventures
 
-### Trip Score Explanation
-- **70-100** 🟢 Excellent - Perfect conditions for outdoor activities
-- **40-69** 🟡 Moderate - Acceptable conditions with some limitations
-- **0-39** 🔴 Poor - Challenging conditions, consider alternatives
+### Trip Score Algorithm
+The trip suitability score combines multiple environmental factors:
+
+**Score Breakdown:**
+- **70-100** 🟢 **Excellent** - Ideal conditions for all outdoor activities
+  - Clear skies (< 20% cloud cover)
+  - Moderate temperatures (15-25°C)
+  - Low precipitation probability
+  - Good air quality
+
+- **40-69** 🟡 **Moderate** - Acceptable with some limitations
+  - Partial cloud cover (20-60%)
+  - Temperature variations
+  - Light precipitation possible
+  - Moderate wind conditions
+
+- **0-39** 🔴 **Poor** - Challenging conditions, reconsider timing
+  - Heavy cloud cover (> 60%)
+  - Extreme temperatures
+  - High precipitation probability
+  - Poor visibility or air quality
+
+### Data Sources & Attribution
+- **NASA GIBS** - Satellite imagery updated daily (1km resolution)
+- **Open-Meteo API** - Weather forecasts with hourly granularity
+- **Nominatim (OpenStreetMap)** - Reverse geocoding for location names
+- **Orbital Data** - TLE (Two-Line Element) datasets for satellite tracking
 
 ## 📁 Project Structure
 

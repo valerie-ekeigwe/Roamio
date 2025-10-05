@@ -219,17 +219,97 @@ Recommended monitoring tools:
 ## Troubleshooting
 
 ### Blank page after deployment
-- Check browser console for errors
-- Verify `base` path in `vite.config.ts` matches your deployment path
-- Ensure all assets are loading correctly
+**Symptoms:** White screen, no content visible
 
-### 404 on page refresh
-- Your server needs to redirect all routes to `index.html`
-- Check server configuration (Nginx/Apache examples above)
+**Solutions:**
+1. Open browser DevTools Console (F12) and check for errors
+2. Verify `base` path in `vite.config.ts` matches your deployment path
+   - GitHub Pages: `base: '/repository-name/'`
+   - Root domain: `base: '/'`
+3. Check Network tab to ensure all assets (JS, CSS) are loading correctly
+4. Verify build completed successfully: `ls -la dist/` should show `index.html` and `assets/` folder
+5. Clear browser cache and hard refresh (Ctrl+Shift+R or Cmd+Shift+R)
+
+### 404 on page refresh (SPA routing issue)
+**Symptoms:** Clicking links works, but refreshing the page shows 404
+
+**Root Cause:** Server doesn't know about client-side routes
+
+**Solutions by Platform:**
+- **Netlify:** Create `public/_redirects` file:
+  ```
+  /* /index.html 200
+  ```
+- **Vercel:** No action needed (auto-configured)
+- **GitHub Pages:** Add `404.html` that redirects to `index.html`
+- **Nginx/Apache:** See server configuration examples above
+
+### Map tiles not loading
+**Symptoms:** Gray squares instead of satellite imagery
+
+**Solutions:**
+1. Check browser console for CORS or network errors
+2. Verify NASA GIBS service status: https://status.earthdata.nasa.gov/
+3. Test with different satellite layers (some may have temporary outages)
+4. Ensure firewall/proxy isn't blocking tile requests
+5. Try accessing tiles directly in browser: `https://gibs.earthdata.nasa.gov/...`
+
+### Weather data not displaying
+**Symptoms:** No weather information after clicking location
+
+**Solutions:**
+1. Check Open-Meteo API status: https://open-meteo.com/
+2. Verify location coordinates are valid (lat: -90 to 90, lng: -180 to 180)
+3. Check browser console for API errors
+4. Ensure date is within supported range (typically last 7 days + 14 day forecast)
+5. Test API directly: `https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41`
+
+### Build fails with memory errors
+**Symptoms:** `JavaScript heap out of memory` during build
+
+**Solutions:**
+```bash
+# Increase Node.js memory limit
+NODE_OPTIONS="--max-old-space-size=4096" npm run build
+
+# Or use Bun (faster, more efficient)
+bun install
+bun run build
+```
+
+### Slow initial load time
+**Optimization checklist:**
+- [ ] Enable gzip/brotli compression on server
+- [ ] Configure CDN (Cloudflare, CloudFront)
+- [ ] Enable asset caching headers (1 year for hashed files)
+- [ ] Verify code splitting in build output
+- [ ] Use `npm run build -- --sourcemap` to analyze bundle size
+- [ ] Consider lazy loading satellite layers
 
 ### API CORS issues
-- All APIs used (NASA GIBS, Open-Meteo, Nominatim) support CORS
-- If issues persist, check browser console and API documentation
+**Symptoms:** `Access-Control-Allow-Origin` errors
+
+**Solutions:**
+- All APIs used (NASA GIBS, Open-Meteo, Nominatim) natively support CORS
+- If behind corporate proxy, whitelist:
+  - `*.earthdata.nasa.gov`
+  - `api.open-meteo.com`
+  - `nominatim.openstreetmap.org`
+- Check browser console for specific error messages
+- Test APIs with `curl` to rule out network issues
+
+### Environment variables not working
+**Symptoms:** Features behave differently than development
+
+**Checklist:**
+1. Verify variables are prefixed with `VITE_` (required for Vite)
+2. Restart dev server after changing `.env` files
+3. For production platforms:
+   - **Netlify:** Add in Site settings → Environment variables
+   - **Vercel:** Add in Project settings → Environment Variables
+   - **GitHub Pages:** Use GitHub Secrets in workflow file
+4. Never commit `.env` files to Git (use `.env.example` instead)
+5. Check build logs to confirm variables are available
 
 ## Support
 
