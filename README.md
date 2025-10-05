@@ -16,15 +16,40 @@
 
 Roamio transforms NASA's satellite imagery and real-time weather data into an intuitive tool for outdoor enthusiasts, travelers, and explorers. By combining Earth observation data with meteorological analysis, it helps you find the perfect time and place for your next adventure.
 
+**🌟 Built for the [NASA Space Apps Challenge](https://www.spaceappschallenge.org/)** - leveraging real-time Earth observation data for actionable outdoor insights.
+
+[🚀 **Live Demo**](https://roamio.netlify.app) | [📖 **Documentation**](./DEPLOYMENT.md) | [🤝 **Contributing**](./CONTRIBUTING.md)
+
 ## ✨ Features
 
-- 🛰️ **Real-time NASA Satellite Imagery** - View Earth through NASA GIBS with MODIS satellite data
-- 🌤️ **Weather Intelligence** - Real-time weather analysis powered by Open-Meteo API
-- 📍 **Smart Location Selection** - Click anywhere on Earth to analyze conditions
-- 📊 **Trip Suitability Scoring** - Intelligent scoring system based on cloud cover, precipitation, and more
-- 🗓️ **Historical Data Explorer** - Access past satellite imagery and weather patterns
-- 🎨 **Beautiful UI** - Modern, responsive design with dark mode and smooth animations
-- 🗺️ **Interactive Mapping** - Powered by Leaflet with custom markers and reverse geocoding
+### 🛰️ Multi-Layer Satellite Data Visualization
+- **7 NASA GIBS data layers** with real-time updates:
+  - Sea Surface Temperature (SST)
+  - Aerosol Optical Depth (air quality)
+  - Land Surface Temperature (LST)
+  - Vegetation Health (NDVI)
+  - Snow Cover
+  - Active Fires
+  - Cloud Cover
+- Interactive layer switcher with opacity controls
+- Color-coded legends for data interpretation
+
+### 🛸 Orbital Pass Predictor
+- **ISS flyover times** for any location
+- Starlink constellation visibility
+- Other satellite pass predictions
+- Optimal viewing windows for astrophotography
+
+### 🌤️ Weather Intelligence
+- Real-time weather analysis powered by Open-Meteo API
+- Trip suitability scoring based on conditions
+- Historical weather data access
+
+### 🗺️ Interactive Mapping
+- Click anywhere on Earth to analyze
+- Powered by Leaflet with custom markers
+- Reverse geocoding for location names
+- Beautiful UI with dark mode and smooth animations
 
 ## 🛠️ Tech Stack
 
@@ -57,7 +82,7 @@ Roamio transforms NASA's satellite imagery and real-time weather data into an in
 
 1. **Clone the repository**
    ```bash
-   git clone <YOUR_GIT_URL>
+   git clone https://github.com/YOUR_USERNAME/roamio.git
    cd roamio
    ```
 
@@ -156,18 +181,40 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🗺️ Roadmap
 
-- [ ] Add multi-layer satellite imagery (Blue Marble, VIIRS, etc.)
+### ✅ Phase 1 - Completed
+- [x] Multi-layer satellite data visualization dashboard
+- [x] ISS and satellite pass predictor
+- [x] Interactive layer controls with opacity
+
+### 🚧 Phase 2 - In Progress
+- [ ] 3D terrain & elevation visualization
+- [ ] Advanced weather timeline (24-hour animation)
+- [ ] Environmental impact dashboard
+- [ ] 7-day weather forecast charts
+
+### 🔮 Phase 3 - Planned
+- [ ] Interactive data story mode (curated Earth changes)
+- [ ] Location comparison view (split-screen)
+- [ ] AI-powered insights panel
 - [ ] Location search with autocomplete
 - [ ] Favorite locations bookmarking
-- [ ] 7-day weather forecast charts
 - [ ] Export trip reports as PDF
 - [ ] PWA support for offline usage
 - [ ] Social sharing features
-- [ ] Mobile app (React Native)
 
-## 📧 Contact
+## 🚀 Deployment
 
-Have questions or suggestions? Feel free to open an issue or reach out!
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions for Netlify, Vercel, GitHub Pages, and self-hosting options.
+
+Quick deploy:
+- [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start)
+- [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
+
+## 📧 Contact & Support
+
+- **Issues**: [GitHub Issues](https://github.com/YOUR_USERNAME/roamio/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/YOUR_USERNAME/roamio/discussions)
+- **Contributing**: See [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ---
 
