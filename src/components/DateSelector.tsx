@@ -15,13 +15,13 @@ const DateSelector = ({ date, onDateChange }: DateSelectorProps) => {
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className="w-full justify-start text-left font-normal border-border hover:bg-secondary"
+          className="w-full justify-start text-left font-normal border-border hover:bg-secondary hover:border-primary/50 transition-all duration-300 glow-card"
         >
-          <CalendarIcon className="mr-2 h-4 w-4" />
+          <CalendarIcon className="mr-2 h-4 w-4 text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]" />
           {format(date, 'PPP')}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0 bg-popover border-border">
+      <PopoverContent className="w-auto p-0 bg-popover/95 backdrop-blur-md border-border shadow-xl glow-card">
         <Calendar
           mode="single"
           selected={date}

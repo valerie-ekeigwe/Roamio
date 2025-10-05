@@ -15,13 +15,20 @@ const EarthMap = ({ onLocationSelect, selectedDate }: EarthMapProps) => {
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
 
-    // Initialize map
+    // Initialize map with smooth animations
     map.current = L.map(mapContainer.current, {
       center: [20, 0],
       zoom: 3,
       minZoom: 2,
       maxZoom: 8,
       worldCopyJump: true,
+      zoomAnimation: true,
+      fadeAnimation: true,
+      markerZoomAnimation: true,
+      zoomAnimationThreshold: 4,
+      inertia: true,
+      inertiaDeceleration: 3000,
+      easeLinearity: 0.2,
     });
 
     // Format date for GIBS
@@ -36,6 +43,8 @@ const EarthMap = ({ onLocationSelect, selectedDate }: EarthMapProps) => {
       minZoom: 1,
       maxZoom: 8,
       tileSize: 256,
+      crossOrigin: true,
+      className: 'leaflet-tile',
     }).addTo(map.current);
 
     // Handle map clicks
@@ -47,10 +56,15 @@ const EarthMap = ({ onLocationSelect, selectedDate }: EarthMapProps) => {
         marker.current.remove();
       }
 
-      // Add new marker with custom icon
+      // Add new marker with custom animated icon
       const customIcon = L.divIcon({
         className: 'custom-marker',
-        html: '<div class="w-6 h-6 bg-primary rounded-full border-2 border-background shadow-lg animate-pulse"></div>',
+        html: `
+          <div class="relative animate-scale-bounce">
+            <div class="w-6 h-6 bg-primary rounded-full border-2 border-background shadow-lg"></div>
+            <div class="absolute inset-0 w-6 h-6 bg-primary rounded-full animate-ping opacity-75"></div>
+          </div>
+        `,
         iconSize: [24, 24],
         iconAnchor: [12, 12],
       });
@@ -87,11 +101,13 @@ const EarthMap = ({ onLocationSelect, selectedDate }: EarthMapProps) => {
       minZoom: 1,
       maxZoom: 8,
       tileSize: 256,
+      crossOrigin: true,
+      className: 'leaflet-tile',
     }).addTo(map.current);
   }, [selectedDate]);
 
   return (
-    <div className="relative w-full h-full rounded-lg overflow-hidden border border-border">
+    <div className="relative w-full h-full rounded-lg overflow-hidden border border-border shadow-lg glow-card transition-all duration-300">
       <div ref={mapContainer} className="absolute inset-0" />
     </div>
   );

@@ -22,17 +22,19 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-cosmic">
+    <div className="min-h-screen bg-gradient-cosmic animate-gradient">
       {/* Header */}
-      <header className="border-b border-border bg-background/50 backdrop-blur-sm">
+      <header className="border-b border-border/50 bg-background/80 backdrop-blur-md shadow-lg">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-primary rounded-lg">
+              <div className="p-2 bg-primary rounded-lg shadow-lg hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_15px_hsl(var(--primary)/0.6)]">
                 <Globe2 className="w-6 h-6 text-primary-foreground" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold">Roamio</h1>
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  Roamio
+                </h1>
                 <p className="text-sm text-muted-foreground">
                   Earth exploration powered by NASA
                 </p>
@@ -41,14 +43,14 @@ const Index = () => {
             
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="outline" size="icon">
+                <Button variant="outline" size="icon" className="hover:border-primary/50 hover:bg-primary/10 transition-all duration-300">
                   <Info className="w-4 h-4" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-80 bg-popover border-border">
+              <PopoverContent className="w-80 bg-popover/95 backdrop-blur-md border-border shadow-xl glow-card">
                 <div className="space-y-2">
                   <h3 className="font-semibold flex items-center gap-2">
-                    <Satellite className="w-4 h-4 text-primary" />
+                    <Satellite className="w-4 h-4 text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]" />
                     How it works
                   </h3>
                   <p className="text-sm text-muted-foreground">
@@ -82,7 +84,7 @@ const Index = () => {
           <div className="space-y-6">
             <div>
               <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                <Satellite className="w-5 h-5 text-primary" />
+                <Satellite className="w-5 h-5 text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]" />
                 Date Selection
               </h2>
               <DateSelector date={selectedDate} onDateChange={setSelectedDate} />
@@ -99,8 +101,11 @@ const Index = () => {
             </div>
 
             {location && (
-              <div className="p-4 rounded-lg bg-card/50 backdrop-blur-sm border border-border">
-                <h3 className="text-sm font-medium mb-2">Selected Location</h3>
+              <div className="p-4 rounded-lg bg-card/80 backdrop-blur-md border border-border hover:border-primary/50 transition-all duration-300 glow-card">
+                <h3 className="text-sm font-medium mb-2 flex items-center gap-2">
+                  <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                  Selected Location
+                </h3>
                 <p className="text-xs text-muted-foreground">
                   Lat: {location.lat.toFixed(4)}°
                 </p>
