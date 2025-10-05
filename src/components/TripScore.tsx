@@ -1,5 +1,4 @@
-import { Cloud, Droplets, Wind, Thermometer } from 'lucide-react';
-import { Card } from '@/components/ui/card';
+import { Cloud, Droplets, Satellite } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 interface TripScoreProps {
@@ -50,88 +49,100 @@ const TripScore = ({ score, cloudCover, precipitation, loading }: TripScoreProps
 
   if (loading) {
     return (
-      <Card className="p-6 bg-card/80 backdrop-blur-md border-border glow-card transition-all duration-300">
+      <div className="glass-card p-6 rounded-2xl border border-border/30">
         <div className="h-32 flex items-center justify-center">
           <div className="space-y-3 w-full">
-            <div className="h-4 bg-muted rounded animate-pulse"></div>
-            <div className="h-16 bg-muted rounded-xl animate-pulse"></div>
-            <div className="h-3 bg-muted rounded animate-pulse"></div>
+            <div className="h-4 bg-muted/30 rounded animate-pulse" />
+            <div className="h-16 bg-muted/30 rounded-xl animate-pulse" />
+            <div className="h-3 bg-muted/30 rounded animate-pulse" />
           </div>
         </div>
-      </Card>
+      </div>
     );
   }
 
   if (score === null) {
     return (
-      <Card className="p-6 bg-card/80 backdrop-blur-md border-border hover:border-primary/50 transition-all duration-300 glow-card">
-        <div className="h-32 flex items-center justify-center">
-          <p className="text-muted-foreground text-center animate-pulse">
-            Click on the map to analyze a location
+      <div className="glass-card p-8 rounded-2xl border border-border/30 text-center">
+        <div className="space-y-4">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-muted/20 to-muted/5 flex items-center justify-center mx-auto">
+            <Satellite className="w-8 h-8 text-muted-foreground/50" />
+          </div>
+          <p className="text-sm text-muted-foreground font-light">
+            Select coordinates on the map
+            <br />
+            <span className="text-xs">to initiate analysis</span>
           </p>
         </div>
-      </Card>
+      </div>
     );
   }
 
   return (
-    <Card className="p-6 bg-card/80 backdrop-blur-md border-border hover:border-primary/50 transition-all duration-300 hover:scale-[1.02] glow-card">
-      <div className="space-y-4">
-        <div className="text-center">
-          <p className="text-sm text-muted-foreground mb-2">Trip Score</p>
-          <div
-            className={`inline-block px-8 py-4 rounded-2xl bg-gradient-to-br ${getScoreColor(
-              score
-            )} shadow-lg hover:shadow-xl transition-all duration-300`}
-          >
-            <div className={`text-5xl font-bold ${animateScore ? 'animate-number-pop' : ''}`}>
-              {displayScore}
-            </div>
-            <div className="text-sm font-medium mt-1 opacity-90">
-              {getScoreLabel(score)}
+    <div className="space-y-6">
+      {/* Score Display */}
+      <div className="relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl blur-xl" />
+        <div className="relative glass-card rounded-2xl p-8 border border-border/30 text-center">
+          <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-mono mb-3">
+            Mission Score
+          </p>
+          <div className="relative inline-block">
+            <div
+              className={`inline-flex items-center justify-center w-32 h-32 rounded-2xl bg-gradient-to-br ${getScoreColor(
+                score
+              )} shadow-[var(--shadow-glow-cyan)]`}
+            >
+              <div className={`text-6xl font-bold ${animateScore ? 'animate-number-pop' : ''}`}>
+                {displayScore}
+              </div>
             </div>
           </div>
-        </div>
-
-        <div className="space-y-3 pt-4 border-t border-border/50">
-          <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all duration-300 group">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                <Cloud className="w-5 h-5 text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]" />
-              </div>
-              <p className="text-sm font-medium">Cloud Cover</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-24 h-2 bg-muted rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-500"
-                  style={{ width: `${cloudCover}%` }}
-                />
-              </div>
-              <p className="text-lg font-bold min-w-[3rem] text-right">{cloudCover}%</p>
-            </div>
-          </div>
-          
-          <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all duration-300 group">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                <Droplets className="w-5 h-5 text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]" />
-              </div>
-              <p className="text-sm font-medium">Precipitation</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-24 h-2 bg-muted rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-gradient-to-r from-info to-primary transition-all duration-500"
-                  style={{ width: `${precipitation}%` }}
-                />
-              </div>
-              <p className="text-lg font-bold min-w-[3rem] text-right">{precipitation}%</p>
-            </div>
+          <div className="mt-4 text-sm font-medium uppercase tracking-wider text-muted-foreground">
+            {getScoreLabel(score)}
           </div>
         </div>
       </div>
-    </Card>
+
+      {/* Metrics */}
+      <div className="space-y-3">
+        <div className="glass-card rounded-xl p-4 border border-border/30 group hover:border-primary/30 transition-all duration-300">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Cloud className="w-3.5 h-3.5 text-primary" />
+              </div>
+              <p className="text-xs font-medium uppercase tracking-wider">Cloud Cover</p>
+            </div>
+            <p className="text-xl font-bold font-mono">{cloudCover}%</p>
+          </div>
+          <div className="h-1.5 bg-muted/30 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-700 ease-out"
+              style={{ width: `${cloudCover}%` }}
+            />
+          </div>
+        </div>
+
+        <div className="glass-card rounded-xl p-4 border border-border/30 group hover:border-primary/30 transition-all duration-300">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 rounded-lg bg-info/10 flex items-center justify-center">
+                <Droplets className="w-3.5 h-3.5 text-info" />
+              </div>
+              <p className="text-xs font-medium uppercase tracking-wider">Precipitation</p>
+            </div>
+            <p className="text-xl font-bold font-mono">{precipitation}%</p>
+          </div>
+          <div className="h-1.5 bg-muted/30 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-info to-primary transition-all duration-700 ease-out"
+              style={{ width: `${precipitation}%` }}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

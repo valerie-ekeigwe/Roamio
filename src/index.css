@@ -8,49 +8,54 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 220 30% 16%;
-    --foreground: 210 40% 98%;
+    /* NASA x Apple x Google Earth Palette */
+    --background: 217 45% 8%;        /* Deep cosmic navy */
+    --foreground: 0 0% 98%;          /* Matte white */
 
-    --card: 220 25% 20%;
-    --card-foreground: 210 40% 98%;
+    --card: 217 40% 12%;             /* Slightly lighter navy for cards */
+    --card-foreground: 0 0% 98%;
 
-    --popover: 220 25% 18%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 217 40% 10%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 195 100% 55%;
-    --primary-foreground: 220 25% 10%;
+    --primary: 187 100% 50%;         /* Electric cyan */
+    --primary-foreground: 217 45% 8%;
 
-    --secondary: 220 20% 25%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 217 35% 15%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 20% 22%;
-    --muted-foreground: 215 25% 70%;
+    --muted: 217 30% 18%;
+    --muted-foreground: 220 15% 65%;
 
-    --accent: 270 70% 60%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 43 85% 60%;            /* Muted gold */
+    --accent-foreground: 217 45% 8%;
 
-    --destructive: 0 80% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 220 20% 30%;
-    --input: 220 20% 28%;
-    --ring: 195 100% 55%;
+    --border: 217 30% 20%;
+    --input: 217 30% 18%;
+    --ring: 187 100% 50%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
     --success: 142 76% 50%;
-    --warning: 38 92% 55%;
-    --info: 195 100% 55%;
+    --warning: 43 85% 60%;
+    --info: 187 100% 50%;
     
-    --gradient-cosmic: linear-gradient(135deg, hsl(220 30% 16%), hsl(260 50% 20%), hsl(280 40% 18%));
-    --gradient-hero: linear-gradient(135deg, hsl(220 30% 16%) 0%, hsl(260 50% 20%) 50%, hsl(195 100% 20%) 100%);
-    --gradient-score-good: linear-gradient(135deg, hsl(142 76% 50%), hsl(160 70% 55%));
-    --gradient-score-medium: linear-gradient(135deg, hsl(38 92% 55%), hsl(45 95% 60%));
-    --gradient-score-poor: linear-gradient(135deg, hsl(0 80% 60%), hsl(10 75% 65%));
+    /* NASA-inspired gradients */
+    --gradient-cosmic: linear-gradient(135deg, hsl(217 45% 8%) 0%, hsl(235 50% 12%) 50%, hsl(217 40% 10%) 100%);
+    --gradient-orbital: linear-gradient(120deg, hsl(187 100% 50% / 0.1), hsl(43 85% 60% / 0.1), hsl(187 100% 50% / 0.1));
+    --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.1), hsl(0 0% 100% / 0.05));
+    --gradient-hero: radial-gradient(ellipse at top, hsl(187 100% 50% / 0.15), transparent 50%),
+                     radial-gradient(ellipse at bottom, hsl(43 85% 60% / 0.08), transparent 50%);
     
-    --shadow-glow: 0 0 30px -5px hsl(195 100% 55% / 0.4);
-    --shadow-card: 0 10px 40px -10px hsl(220 30% 10% / 0.6);
-    --shadow-intense: 0 0 50px -10px hsl(195 100% 55% / 0.6);
+    /* Shadows - Apple-style precision */
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --shadow-float: 0 20px 60px -15px rgba(0, 0, 0, 0.5);
+    --shadow-glow-cyan: 0 0 40px -5px hsl(187 100% 50% / 0.4);
+    --shadow-glow-gold: 0 0 30px -5px hsl(43 85% 60% / 0.3);
+    --shadow-intense: 0 0 80px -10px hsl(187 100% 50% / 0.6);
 
     --sidebar-background: 220 25% 18%;
     --sidebar-foreground: 210 40% 98%;
@@ -108,7 +113,14 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'IBM Plex Sans', 'Inter', -apple-system, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
 }
 
@@ -165,14 +177,78 @@ All colors MUST be HSL.
   animation: scale-bounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Glow effect */
-.glow-card {
-  box-shadow: 0 0 30px -5px hsl(var(--primary) / 0.3);
-  transition: box-shadow 300ms ease-in-out;
+/* Glassmorphism effect */
+.glass-card {
+  background: linear-gradient(135deg, hsl(0 0% 100% / 0.08), hsl(0 0% 100% / 0.03));
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid hsl(0 0% 100% / 0.1);
+  box-shadow: var(--shadow-glass);
 }
 
-.glow-card:hover {
-  box-shadow: 0 0 40px -5px hsl(var(--primary) / 0.5);
+.glass-card:hover {
+  background: linear-gradient(135deg, hsl(0 0% 100% / 0.12), hsl(0 0% 100% / 0.06));
+  border-color: hsl(187 100% 50% / 0.3);
+  box-shadow: var(--shadow-glass), var(--shadow-glow-cyan);
+}
+
+/* Orbital animation */
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(100px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(100px) rotate(-360deg);
+  }
+}
+
+.animate-orbit {
+  animation: orbit 20s linear infinite;
+}
+
+/* Pulse glow */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    filter: blur(20px);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(30px);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Float animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Shimmer effect */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, hsl(187 100% 50% / 0.3), transparent);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
 }
 
 /* Number counter animation */

@@ -1,12 +1,12 @@
 import { useState, useRef } from 'react';
-import { Satellite, Globe2, Info } from 'lucide-react';
+import { Satellite, MapPin, Calendar as CalendarIcon } from 'lucide-react';
 import EarthMap from '@/components/EarthMap';
 import TripScore from '@/components/TripScore';
 import DateSelector from '@/components/DateSelector';
 import HeroSection from '@/components/HeroSection';
+import StarField from '@/components/StarField';
 import { useWeatherData } from '@/hooks/useWeatherData';
 import { Button } from '@/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 const Index = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(() => {
@@ -36,107 +36,120 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-cosmic animate-gradient">
+    <div className="relative min-h-screen">
+      {/* Star field background */}
+      <StarField />
+
       {/* Hero Section */}
       {showHero && <HeroSection onGetStarted={handleGetStarted} />}
 
-      {/* Header */}
-      <header ref={mapRef} className="border-b border-border/50 bg-background/80 backdrop-blur-md shadow-lg sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-primary rounded-lg shadow-lg hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_15px_hsl(var(--primary)/0.6)]">
-                <Globe2 className="w-6 h-6 text-primary-foreground" />
+      {/* Main app interface */}
+      <div ref={mapRef} className="relative z-10 min-h-screen bg-background/95">
+        {/* Minimal navigation bar */}
+        <nav className="sticky top-0 z-50 glass-card border-b border-border/30">
+          <div className="container mx-auto px-6 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border border-primary/20">
+                  <Satellite className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <h1 className="text-xl font-semibold tracking-tight">Roamio</h1>
+                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-mono">
+                    Mission Control
+                  </p>
+                </div>
               </div>
-              <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  Roamio
-                </h1>
-                <p className="text-sm text-muted-foreground">
-                  Earth exploration powered by NASA
-                </p>
+
+              <div className="flex items-center gap-4">
+                <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg glass-card text-xs">
+                  <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+                  <span className="font-mono text-muted-foreground">Live Data</span>
+                </div>
               </div>
             </div>
-            
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="outline" size="icon" className="hover:border-primary/50 hover:bg-primary/10 transition-all duration-300">
-                  <Info className="w-4 h-4" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-80 bg-popover/95 backdrop-blur-md border-border shadow-xl glow-card">
-                <div className="space-y-2">
-                  <h3 className="font-semibold flex items-center gap-2">
-                    <Satellite className="w-4 h-4 text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]" />
-                    How it works
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    Roamio combines NASA GIBS satellite imagery with Open-Meteo weather data
-                    to calculate the best times and locations for outdoor exploration.
-                  </p>
-                  <div className="pt-2 space-y-1 text-xs text-muted-foreground">
-                    <p>• Click anywhere on Earth to analyze</p>
-                    <p>• Change dates to explore temporal patterns</p>
-                    <p>• Trip Score: 70+ Excellent, 40-69 Moderate, &lt;40 Poor</p>
+          </div>
+        </nav>
+
+        {/* Main Content */}
+        <main className="container mx-auto px-6 py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Map - Takes 2 columns */}
+            <div className="lg:col-span-2">
+              <div className="glass-card rounded-2xl overflow-hidden border border-border/30 shadow-[var(--shadow-float)]">
+                <div className="h-[70vh] lg:h-[calc(100vh-200px)]">
+                  <EarthMap
+                    onLocationSelect={handleLocationSelect}
+                    selectedDate={selectedDate}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Control Panel Sidebar */}
+            <div className="space-y-6">
+              {/* Date Selector */}
+              <div className="glass-card rounded-2xl p-6 border border-border/30">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center">
+                    <CalendarIcon className="w-4 h-4 text-accent" />
+                  </div>
+                  <h2 className="text-sm font-semibold uppercase tracking-wider">
+                    Temporal Analysis
+                  </h2>
+                </div>
+                <DateSelector date={selectedDate} onDateChange={setSelectedDate} />
+              </div>
+
+              {/* Trip Score */}
+              <div className="glass-card rounded-2xl p-6 border border-border/30">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                    <Satellite className="w-4 h-4 text-primary" />
+                  </div>
+                  <h2 className="text-sm font-semibold uppercase tracking-wider">
+                    Mission Viability
+                  </h2>
+                </div>
+                <TripScore
+                  score={weatherData?.score ?? null}
+                  cloudCover={weatherData?.cloudCover ?? null}
+                  precipitation={weatherData?.precipitation ?? null}
+                  loading={isLoading}
+                />
+              </div>
+
+              {/* Location Info */}
+              {location && (
+                <div className="glass-card rounded-2xl p-6 border border-border/30 group hover:border-primary/30 transition-all duration-300">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                      <MapPin className="w-4 h-4 text-primary" />
+                    </div>
+                    <h3 className="text-sm font-semibold uppercase tracking-wider">
+                      Target Coordinates
+                    </h3>
+                  </div>
+                  {location.name && (
+                    <p className="text-base font-medium mb-3 text-foreground">{location.name}</p>
+                  )}
+                  <div className="space-y-1.5 font-mono text-xs">
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground">LAT</span>
+                      <span className="text-primary font-semibold">{location.lat.toFixed(6)}°</span>
+                    </div>
+                    <div className="h-px bg-border/50" />
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground">LNG</span>
+                      <span className="text-primary font-semibold">{location.lng.toFixed(6)}°</span>
+                    </div>
                   </div>
                 </div>
-              </PopoverContent>
-            </Popover>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Map - Takes 2 columns on large screens */}
-          <div className="lg:col-span-2 h-[70vh] lg:h-[calc(100vh-180px)]">
-            <EarthMap
-              onLocationSelect={handleLocationSelect}
-              selectedDate={selectedDate}
-            />
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            <div>
-              <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                <Satellite className="w-5 h-5 text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]" />
-                Date Selection
-              </h2>
-              <DateSelector date={selectedDate} onDateChange={setSelectedDate} />
+              )}
             </div>
-
-            <div>
-              <h2 className="text-lg font-semibold mb-3">Trip Analysis</h2>
-              <TripScore
-                score={weatherData?.score ?? null}
-                cloudCover={weatherData?.cloudCover ?? null}
-                precipitation={weatherData?.precipitation ?? null}
-                loading={isLoading}
-              />
-            </div>
-
-            {location && (
-              <div className="p-4 rounded-lg bg-card/80 backdrop-blur-md border border-border hover:border-primary/50 transition-all duration-300 glow-card">
-                <h3 className="text-sm font-medium mb-2 flex items-center gap-2">
-                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                  Selected Location
-                </h3>
-                {location.name && (
-                  <p className="text-sm font-medium mb-2">{location.name}</p>
-                )}
-                <p className="text-xs text-muted-foreground">
-                  Lat: {location.lat.toFixed(4)}°
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  Lng: {location.lng.toFixed(4)}°
-                </p>
-              </div>
-            )}
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 };

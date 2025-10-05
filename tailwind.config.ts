@@ -13,6 +13,11 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'system-ui', 'sans-serif'],
+        mono: ['IBM Plex Mono', 'Menlo', 'Monaco', 'Courier New', 'monospace'],
+        display: ['IBM Plex Sans', 'Inter', '-apple-system', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -63,9 +68,9 @@ export default {
       },
       backgroundImage: {
         'gradient-cosmic': 'var(--gradient-cosmic)',
-        'gradient-score-good': 'var(--gradient-score-good)',
-        'gradient-score-medium': 'var(--gradient-score-medium)',
-        'gradient-score-poor': 'var(--gradient-score-poor)',
+        'gradient-orbital': 'var(--gradient-orbital)',
+        'gradient-glass': 'var(--gradient-glass)',
+        'gradient-hero': 'var(--gradient-hero)',
       },
       borderRadius: {
         lg: "var(--radius)",
