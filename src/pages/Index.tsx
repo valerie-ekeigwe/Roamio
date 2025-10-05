@@ -8,8 +8,12 @@ import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 const Index = () => {
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  const [location, setLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date>(() => {
+    const date = new Date();
+    date.setDate(date.getDate() - 7); // 7 days ago for GIBS data availability
+    return date;
+  });
+  const [location, setLocation] = useState<{ lat: number; lng: number; name?: string } | null>(null);
 
   const { data: weatherData, isLoading } = useWeatherData(
     location?.lat ?? null,
@@ -17,8 +21,8 @@ const Index = () => {
     selectedDate
   );
 
-  const handleLocationSelect = (lat: number, lng: number) => {
-    setLocation({ lat, lng });
+  const handleLocationSelect = (lat: number, lng: number, name?: string) => {
+    setLocation({ lat, lng, name });
   };
 
   return (
@@ -103,9 +107,12 @@ const Index = () => {
             {location && (
               <div className="p-4 rounded-lg bg-card/80 backdrop-blur-md border border-border hover:border-primary/50 transition-all duration-300 glow-card">
                 <h3 className="text-sm font-medium mb-2 flex items-center gap-2">
-                  <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
                   Selected Location
                 </h3>
+                {location.name && (
+                  <p className="text-sm font-medium mb-2">{location.name}</p>
+                )}
                 <p className="text-xs text-muted-foreground">
                   Lat: {location.lat.toFixed(4)}°
                 </p>
