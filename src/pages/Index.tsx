@@ -74,12 +74,13 @@ const Index = () => {
         </nav>
 
         {/* Main Content */}
-        <main className="container mx-auto px-6 py-8">
+        <main className="container mx-auto px-6 py-8 space-y-8">
+          {/* Map and Controls Section */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Map - Takes 2 columns */}
             <div className="lg:col-span-2">
               <div className="glass-card rounded-2xl overflow-hidden border border-border/30 shadow-[var(--shadow-float)]">
-                <div className="h-[70vh] lg:h-[calc(100vh-200px)]">
+                <div className="h-[70vh] lg:h-[600px]">
                   <EarthMap
                     onLocationSelect={handleLocationSelect}
                     selectedDate={selectedDate}
@@ -105,27 +106,6 @@ const Index = () => {
 
               {/* Satellite Data Panel */}
               <SatelliteDataPanel selectedDate={selectedDate} />
-
-              {/* Satellite Pass Predictor */}
-              <SatellitePassPredictor location={location} selectedDate={selectedDate} />
-
-              {/* Trip Score */}
-              <div className="glass-card rounded-2xl p-6 border border-border/30">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                    <Satellite className="w-4 h-4 text-primary" />
-                  </div>
-                  <h2 className="text-sm font-semibold uppercase tracking-wider">
-                    Mission Viability
-                  </h2>
-                </div>
-                <TripScore
-                  score={weatherData?.score ?? null}
-                  cloudCover={weatherData?.cloudCover ?? null}
-                  precipitation={weatherData?.precipitation ?? null}
-                  loading={isLoading}
-                />
-              </div>
 
               {/* Location Info */}
               {location && (
@@ -154,6 +134,30 @@ const Index = () => {
                   </div>
                 </div>
               )}
+            </div>
+          </div>
+
+          {/* Key Results Section - Full Width Below Map */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Satellite Pass Predictor */}
+            <SatellitePassPredictor location={location} selectedDate={selectedDate} />
+
+            {/* Mission Viability Score */}
+            <div className="glass-card rounded-2xl p-6 border border-border/30">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                  <Satellite className="w-4 h-4 text-primary" />
+                </div>
+                <h2 className="text-sm font-semibold uppercase tracking-wider">
+                  Mission Viability
+                </h2>
+              </div>
+              <TripScore
+                score={weatherData?.score ?? null}
+                cloudCover={weatherData?.cloudCover ?? null}
+                precipitation={weatherData?.precipitation ?? null}
+                loading={isLoading}
+              />
             </div>
           </div>
         </main>
