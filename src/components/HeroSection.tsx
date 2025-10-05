@@ -43,9 +43,7 @@ const HeroSection = ({ onGetStarted }: HeroSectionProps) => {
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed">
-              Intelligence-driven exploration powered by NASA satellite imagery.
-              <br />
-              Plan your next adventure with precision weather analysis.
+              Intelligence-driven exploration powered by real-time NASA satellite data, multi-layer Earth observation, and orbital tracking for your next adventure.
             </p>
           </div>
 

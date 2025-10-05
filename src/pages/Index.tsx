@@ -1,10 +1,12 @@
 import { useState, useRef } from 'react';
-import { Satellite, MapPin, Calendar as CalendarIcon } from 'lucide-react';
+import { Satellite, MapPin, Calendar as CalendarIcon, Layers } from 'lucide-react';
 import EarthMap from '@/components/EarthMap';
 import TripScore from '@/components/TripScore';
 import DateSelector from '@/components/DateSelector';
 import HeroSection from '@/components/HeroSection';
 import StarField from '@/components/StarField';
+import SatelliteDataPanel from '@/components/SatelliteDataPanel';
+import SatellitePassPredictor from '@/components/SatellitePassPredictor';
 import { useWeatherData } from '@/hooks/useWeatherData';
 import { Button } from '@/components/ui/button';
 
@@ -100,6 +102,12 @@ const Index = () => {
                 </div>
                 <DateSelector date={selectedDate} onDateChange={setSelectedDate} />
               </div>
+
+              {/* Satellite Data Panel */}
+              <SatelliteDataPanel selectedDate={selectedDate} />
+
+              {/* Satellite Pass Predictor */}
+              <SatellitePassPredictor location={location} selectedDate={selectedDate} />
 
               {/* Trip Score */}
               <div className="glass-card rounded-2xl p-6 border border-border/30">
