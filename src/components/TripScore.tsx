@@ -1,4 +1,4 @@
-import { Cloud, Droplets } from 'lucide-react';
+import { Cloud, Droplets, Wind, Thermometer } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { useEffect, useState } from 'react';
 
@@ -93,19 +93,40 @@ const TripScore = ({ score, cloudCover, precipitation, loading }: TripScoreProps
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 pt-4 border-t border-border/50">
-          <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all duration-300">
-            <Cloud className="w-5 h-5 text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]" />
-            <div>
-              <p className="text-xs text-muted-foreground">Cloud Cover</p>
-              <p className="text-lg font-semibold">{cloudCover}%</p>
+        <div className="space-y-3 pt-4 border-t border-border/50">
+          <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all duration-300 group">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                <Cloud className="w-5 h-5 text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]" />
+              </div>
+              <p className="text-sm font-medium">Cloud Cover</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-24 h-2 bg-muted rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-500"
+                  style={{ width: `${cloudCover}%` }}
+                />
+              </div>
+              <p className="text-lg font-bold min-w-[3rem] text-right">{cloudCover}%</p>
             </div>
           </div>
-          <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all duration-300">
-            <Droplets className="w-5 h-5 text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]" />
-            <div>
-              <p className="text-xs text-muted-foreground">Precipitation</p>
-              <p className="text-lg font-semibold">{precipitation}%</p>
+          
+          <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all duration-300 group">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                <Droplets className="w-5 h-5 text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]" />
+              </div>
+              <p className="text-sm font-medium">Precipitation</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-24 h-2 bg-muted rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-info to-primary transition-all duration-500"
+                  style={{ width: `${precipitation}%` }}
+                />
+              </div>
+              <p className="text-lg font-bold min-w-[3rem] text-right">{precipitation}%</p>
             </div>
           </div>
         </div>

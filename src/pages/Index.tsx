@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Satellite, Globe2, Info } from 'lucide-react';
 import EarthMap from '@/components/EarthMap';
 import TripScore from '@/components/TripScore';
 import DateSelector from '@/components/DateSelector';
+import HeroSection from '@/components/HeroSection';
 import { useWeatherData } from '@/hooks/useWeatherData';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -14,6 +15,8 @@ const Index = () => {
     return date;
   });
   const [location, setLocation] = useState<{ lat: number; lng: number; name?: string } | null>(null);
+  const [showHero, setShowHero] = useState(true);
+  const mapRef = useRef<HTMLDivElement>(null);
 
   const { data: weatherData, isLoading } = useWeatherData(
     location?.lat ?? null,
@@ -25,10 +28,20 @@ const Index = () => {
     setLocation({ lat, lng, name });
   };
 
+  const handleGetStarted = () => {
+    setShowHero(false);
+    setTimeout(() => {
+      mapRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-cosmic animate-gradient">
+      {/* Hero Section */}
+      {showHero && <HeroSection onGetStarted={handleGetStarted} />}
+
       {/* Header */}
-      <header className="border-b border-border/50 bg-background/80 backdrop-blur-md shadow-lg">
+      <header ref={mapRef} className="border-b border-border/50 bg-background/80 backdrop-blur-md shadow-lg sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">

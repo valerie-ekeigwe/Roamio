@@ -1,73 +1,176 @@
-# Welcome to your Lovable project
+<div align="center">
+  <h1>🌍 Roamio</h1>
+  <p><strong>Turn satellite data into actionable insights for outdoor exploration</strong></p>
+  
+  <p>
+    <img src="https://img.shields.io/badge/React-18.3.1-61dafb?style=for-the-badge&logo=react" alt="React" />
+    <img src="https://img.shields.io/badge/TypeScript-5.6-3178c6?style=for-the-badge&logo=typescript" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Vite-6.0-646cff?style=for-the-badge&logo=vite" alt="Vite" />
+    <img src="https://img.shields.io/badge/Tailwind-3.4-38bdf8?style=for-the-badge&logo=tailwindcss" alt="Tailwind" />
+  </p>
+</div>
 
-## Project info
+---
 
-**URL**: https://lovable.dev/projects/3b5e16b5-6c1d-4dc4-bcea-35e34dc25742
+## 🚀 About
 
-## How can I edit this code?
+Roamio transforms NASA's satellite imagery and real-time weather data into an intuitive tool for outdoor enthusiasts, travelers, and explorers. By combining Earth observation data with meteorological analysis, it helps you find the perfect time and place for your next adventure.
 
-There are several ways of editing your application.
+## ✨ Features
 
-**Use Lovable**
+- 🛰️ **Real-time NASA Satellite Imagery** - View Earth through NASA GIBS with MODIS satellite data
+- 🌤️ **Weather Intelligence** - Real-time weather analysis powered by Open-Meteo API
+- 📍 **Smart Location Selection** - Click anywhere on Earth to analyze conditions
+- 📊 **Trip Suitability Scoring** - Intelligent scoring system based on cloud cover, precipitation, and more
+- 🗓️ **Historical Data Explorer** - Access past satellite imagery and weather patterns
+- 🎨 **Beautiful UI** - Modern, responsive design with dark mode and smooth animations
+- 🗺️ **Interactive Mapping** - Powered by Leaflet with custom markers and reverse geocoding
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/3b5e16b5-6c1d-4dc4-bcea-35e34dc25742) and start prompting.
+## 🛠️ Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+### Frontend
+- **React** - Modern UI library
+- **TypeScript** - Type-safe development
+- **Vite** - Lightning-fast build tool
+- **Tailwind CSS** - Utility-first styling
+- **shadcn/ui** - Beautiful component library
 
-**Use your preferred IDE**
+### APIs & Data
+- **NASA GIBS** - Global Imagery Browse Services for satellite imagery
+- **Open-Meteo** - Weather forecasting and historical data
+- **Nominatim** - Reverse geocoding for location names
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Libraries
+- **Leaflet** - Interactive mapping
+- **TanStack Query** - Data fetching and caching
+- **React Router** - Client-side routing
+- **date-fns** - Date manipulation
+- **Lucide React** - Beautiful icons
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🏃 Getting Started
 
-Follow these steps:
+### Prerequisites
+- Node.js 18+ or Bun
+- npm, yarn, or bun
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Installation
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+1. **Clone the repository**
+   ```bash
+   git clone <YOUR_GIT_URL>
+   cd roamio
+   ```
 
-# Step 3: Install the necessary dependencies.
-npm i
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   bun install
+   ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+3. **Start development server**
+   ```bash
+   npm run dev
+   # or
+   bun run dev
+   ```
+
+4. **Open your browser**
+   ```
+   Navigate to http://localhost:8080
+   ```
+
+### Build for Production
+
+```bash
+npm run build
+# or
+bun run build
 ```
 
-**Edit a file directly in GitHub**
+The built files will be in the `dist` directory.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🎯 How It Works
 
-**Use GitHub Codespaces**
+1. **Select a Date** - Choose when you want to explore (historical data available)
+2. **Click the Map** - Select any location on Earth
+3. **View Analysis** - Get instant weather insights and trip suitability scores
+4. **Plan Better** - Make informed decisions about your outdoor activities
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Trip Score Explanation
+- **70-100** 🟢 Excellent - Perfect conditions for outdoor activities
+- **40-69** 🟡 Moderate - Acceptable conditions with some limitations
+- **0-39** 🔴 Poor - Challenging conditions, consider alternatives
 
-## What technologies are used for this project?
+## 📁 Project Structure
 
-This project is built with:
+```
+roamio/
+├── src/
+│   ├── components/          # React components
+│   │   ├── ui/             # shadcn/ui components
+│   │   ├── EarthMap.tsx    # Interactive map component
+│   │   ├── TripScore.tsx   # Score display component
+│   │   └── DateSelector.tsx # Date picker component
+│   ├── hooks/              # Custom React hooks
+│   │   ├── useWeatherData.ts
+│   │   └── use-toast.ts
+│   ├── lib/                # Utilities
+│   │   ├── geocoding.ts    # Location name fetching
+│   │   └── utils.ts        # Helper functions
+│   ├── pages/              # Page components
+│   │   ├── Index.tsx       # Main application page
+│   │   └── NotFound.tsx    # 404 page
+│   ├── App.tsx             # App root
+│   ├── main.tsx            # Entry point
+│   └── index.css           # Global styles & design system
+├── public/                 # Static assets
+└── vite.config.ts         # Vite configuration
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 🤝 Contributing
 
-## How can I deploy this project?
+Contributions are welcome! Feel free to:
+- 🐛 Report bugs
+- 💡 Suggest new features
+- 🔧 Submit pull requests
+- 📖 Improve documentation
 
-Simply open [Lovable](https://lovable.dev/projects/3b5e16b5-6c1d-4dc4-bcea-35e34dc25742) and click on Share -> Publish.
+Please follow these steps:
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## Can I connect a custom domain to my Lovable project?
+## 📄 License
 
-Yes, you can!
+This project is open source and available under the [MIT License](LICENSE).
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🙏 Acknowledgments
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- **NASA GIBS** - For providing free access to satellite imagery
+- **Open-Meteo** - For weather forecasting API
+- **OpenStreetMap Contributors** - For mapping data
+- **shadcn** - For the beautiful UI component library
+
+## 🗺️ Roadmap
+
+- [ ] Add multi-layer satellite imagery (Blue Marble, VIIRS, etc.)
+- [ ] Location search with autocomplete
+- [ ] Favorite locations bookmarking
+- [ ] 7-day weather forecast charts
+- [ ] Export trip reports as PDF
+- [ ] PWA support for offline usage
+- [ ] Social sharing features
+- [ ] Mobile app (React Native)
+
+## 📧 Contact
+
+Have questions or suggestions? Feel free to open an issue or reach out!
+
+---
+
+<div align="center">
+  Made with ❤️ for explorers worldwide
+</div>
