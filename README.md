@@ -18,7 +18,7 @@ Roamio transforms NASA's satellite imagery and real-time weather data into an in
 
 ** Built for the [NASA Space Apps Challenge](https://www.spaceappschallenge.org/)** - leveraging real-time Earth observation data for actionable outdoor insights.
 
-[ **Live Demo**](https://roamio.netlify.app) | [📖 **Documentation**](./DEPLOYMENT.md) | [🤝 **Contributing**](./CONTRIBUTING.md)
+[ **Live Demo**](https://r0amio.netlify.app/) | [📖 **Documentation**](./DEPLOYMENT.md) |
 
 ## ✨ Features
 
