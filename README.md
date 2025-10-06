@@ -65,6 +65,8 @@ APIs I'm using:
 ## Running it locally
 
 You need Node.js 18+ installed.
+
+
 ```bash
 # clone it
 git clone https://github.com/valerie-ekeigwe/Roamio.git
@@ -74,5 +76,35 @@ cd roamio
 npm install
 
 # run it
-npm run dev
+npm run dev #
+```
 
+**How to use it**
+- Pick a date (or use today)
+- Click somewhere on the map
+- Toggle the satellite layers to see different data
+- Check the weather and trip score
+- See when satellites pass overhead
+
+The trip score uses this logic:
+70-100 = Good conditions, go for it
+40-69 = Eh, maybe check again tomorrow
+0-39 = Probably stay inside
+
+**Known issues**
+- Sometimes the satellite imagery takes a while to load (NASA's servers, not mine)
+- The mobile experience could be better
+- I should probably add loading states in more places
+- The date picker could be more intuitive
+
+**Contributing**
+If you want to add something or fix bugs, feel free to fork it and make a PR. I'm learning as I go so any feedback is welcome.
+
+**Credits**
+- NASA for the free satellite data
+- Open-Meteo for weather API
+- OpenStreetMap for the geocoding
+- The NASA Space Apps Challenge for giving me a deadline to actually finish this
+
+**License**
+MIT - do whatever you want with it
