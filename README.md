@@ -12,101 +12,67 @@
 
 ---
 
-##  About
+# Roamio
 
-Roamio transforms NASA's satellite imagery and real-time weather data into an intuitive tool for outdoor enthusiasts, travelers, and explorers. By combining Earth observation data with meteorological analysis, it helps you find the perfect time and place for your next adventure.
+A web app that helps you figure out if it's a good time to go outside, using NASA satellite data and weather info.
 
-** Built for the [NASA Space Apps Challenge](https://www.spaceappschallenge.org/)** - leveraging real-time Earth observation data for actionable outdoor insights.
+[Live site](https://r0amio.netlify.app) | [My struggle with deployment](DEPLOYMENT.md)
 
-[ **Live Demo**](https://r0amio.netlify.app) | [📖 **Documentation**](./DEPLOYMENT.md) | [🤝 **Contributing**](./CONTRIBUTING.md)
+## What is this?
 
-##  Features
+I built this for the NASA Space Apps Challenge hackathon. The idea was pretty simple - I wanted to combine satellite imagery with weather data to help people plan outdoor trips better. Instead of just checking "is it raining?", you can see actual satellite views of an area, check air quality, see if there are fires nearby, etc.
 
-###  Multi-Layer Satellite Data Visualization
-Powered by NASA's Global Imagery Browse Services (GIBS), Roamio provides access to **7 real-time Earth observation layers**:
+Basically: click anywhere on a map, pick a date, and see what Earth looks like from space at that spot + whether it's a good idea to go there.
 
-- **Sea Surface Temperature (MODIS Aqua)** - Ocean temperature mapping for marine conditions
-- **Aerosol Optical Depth** - Air quality monitoring and pollution tracking
-- **Land Surface Temperature** - Ground heat mapping for hiking and camping safety
-- **Vegetation Health (NDVI)** - Plant vitality index for landscape assessment
-- **Snow Cover** - Real-time snow depth and coverage for winter sports
-- **Active Fires** - Wildfire detection and tracking for safety alerts
-- **Cloud Cover** - Atmospheric conditions for photography and outdoor planning
+## The main features
 
-**Interactive Controls:**
-- Layer opacity sliders for custom visualization blending
-- Color-coded legends with measurement scales
-- Historical data access (2012-present for most layers)
-- 1km spatial resolution imagery
+**Satellite layers from NASA**
+- I integrated 7 different data layers from NASA's GIBS service
+- You can see things like sea surface temperature, vegetation health, snow cover, active fires
+- The opacity sliders let you blend layers together (this took way longer to get right than I expected)
+- Works with historical data going back to 2012
 
-###  Orbital Pass Predictor
-Never miss a satellite flyover with precise prediction algorithms:
+**When can I see the ISS?**
+- Shows you when the International Space Station flies over your location
+- Also tracks Starlink satellites (they look really cool in the night sky)
+- I spent like 3 hours debugging the orbital calculations because I kept getting the timezone wrong
 
-- **International Space Station (ISS)** - Exact flyover times, elevation angles, and visibility ratings
-- **Starlink Constellation** - Track SpaceX satellite trains for spectacular sightings
-- **Other LEO Satellites** - Hubble, Chinese Space Station, and more
-- **Astrophotography Planning** - Optimal viewing windows with brightness predictions
-- **Custom Date Selection** - Plan future observations up to 30 days ahead
+**Trip planning scores**
+- Takes weather data and gives you a score from 0-100 on how good conditions are
+- Honestly the algorithm could be better, but it works for basic stuff like "is it too cloudy for hiking"
+- Combines temperature, precipitation, cloud cover, wind speed
 
-###  Weather Intelligence
-- Real-time weather analysis powered by Open-Meteo API
-- Trip suitability scoring based on conditions
-- Historical weather data access
+**Interactive map stuff**
+- Click anywhere to analyze that location
+- Gets the actual place name using reverse geocoding
+- I added dark mode because why not
 
-### Interactive Mapping
-- Click anywhere on Earth to analyze
-- Powered by Leaflet with custom markers
-- Reverse geocoding for location names
-- Beautiful UI with dark mode and smooth animations
+## Tech stack
 
+I went with:
+- React + TypeScript (I'm trying to get better at TypeScript)
+- Vite for the build (it's fast)
+- Tailwind CSS (I know, I know, everyone uses it now)
+- shadcn/ui components (saved me time during the hackathon)
+- Leaflet for the map
+- TanStack Query for managing all the API calls
 
-### APIs & Data
-- **NASA GIBS** - Global Imagery Browse Services for satellite imagery
-- **Open-Meteo** - Weather forecasting and historical data
-- **Nominatim** - Reverse geocoding for location names
+APIs I'm using:
+- NASA GIBS for satellite imagery
+- Open-Meteo for weather data (it's free!)
+- Nominatim for getting location names
 
-##  How It Works
+## Running it locally
 
-### Step-by-Step Workflow
-1. **Select a Date** - Choose any date from 2012 to present for historical analysis, or use today's date for current conditions
-2. **Click the Map** - Click anywhere on Earth to analyze that location's environmental conditions
-3. **View Satellite Layers** - Toggle between 7 NASA GIBS layers to see different environmental factors
-4. **Check Satellite Passes** - View upcoming ISS and satellite flyover times for your selected location
-5. **Analyze Weather** - Review real-time weather data and trip suitability scores
-6. **Plan Better** - Make data-driven decisions about your outdoor adventures
+You need Node.js 18+ installed.
+```bash
+# clone it
+git clone https://github.com/valerie-ekeigwe/Roamio.git
+cd roamio
 
-### Trip Score Algorithm
-The trip suitability score combines multiple environmental factors:
+# install stuff
+npm install
 
-**Score Breakdown:**
-- **70-100** 🟢 **Excellent** - Ideal conditions for all outdoor activities
-  - Clear skies (< 20% cloud cover)
-  - Moderate temperatures (15-25°C)
-  - Low precipitation probability
-  - Good air quality
-
-- **40-69** 🟡 **Moderate** - Acceptable with some limitations
-  - Partial cloud cover (20-60%)
-  - Temperature variations
-  - Light precipitation possible
-  - Moderate wind conditions
-
-- **0-39** 🔴 **Poor** - Challenging conditions, reconsider timing
-  - Heavy cloud cover (> 60%)
-  - Extreme temperatures
-  - High precipitation probability
-  - Poor visibility or air quality
-
-### Data Sources & Attribution
-- **NASA GIBS** - Satellite imagery updated daily (1km resolution)
-- **Open-Meteo API** - Weather forecasts with hourly granularity
-- **Nominatim (OpenStreetMap)** - Reverse geocoding for location names
-- **Orbital Data** - TLE (Two-Line Element) datasets for satellite tracking
-
-## Acknowledgments
-
-- **NASA GIBS** - For providing free access to satellite imagery
-- **Open-Meteo** - For weather forecasting API
-- **OpenStreetMap Contributors** - For mapping data
-- **shadcn** - For the beautiful UI component library
+# run it
+npm run dev
 
