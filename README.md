@@ -1,7 +1,5 @@
 <div align="center">
-  <h1> Roamio</h1>
-  <p><strong>Turn satellite data into actionable insights for outdoor exploration</strong></p>
-  
+  <h1> Roamio</h1> 
   <p>
     <img src="https://img.shields.io/badge/React-18.3.1-61dafb?style=for-the-badge&logo=react" alt="React" />
     <img src="https://img.shields.io/badge/TypeScript-5.6-3178c6?style=for-the-badge&logo=typescript" alt="TypeScript" />
