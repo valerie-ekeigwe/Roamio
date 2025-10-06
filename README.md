@@ -16,7 +16,7 @@
 
 A web app that helps you figure out if it's a good time to go outside, using NASA satellite data and weather info.
 
-[Live site](https://r0amio.netlify.app) | [My struggle with deployment](DEPLOYMENT.md)
+[Live site](https://r0amio.netlify.app)
 
 ## What is this?
 
