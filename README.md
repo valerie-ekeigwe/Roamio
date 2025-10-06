@@ -1,11 +1,13 @@
 <div align="center">
-  <h1> Roamio</h1> 
+ <h1>Roamio</h1>
+  
   <p>
     <img src="https://img.shields.io/badge/React-18.3.1-61dafb?style=for-the-badge&logo=react" alt="React" />
     <img src="https://img.shields.io/badge/TypeScript-5.6-3178c6?style=for-the-badge&logo=typescript" alt="TypeScript" />
-    <img src="https://img.shields.io/badge/Vite-6.0-646cff?style=for-the-badge&logo=vite" alt="Vite" />
-    <img src="https://img.shields.io/badge/Tailwind-3.4-38bdf8?style=for-the-badge&logo=tailwindcss" alt="Tailwind" />
+    <img src="https://img.shields.io/badge/Built%20in-48hrs-orange?style=for-the-badge" alt="Built in 48hrs" />
   </p>
+  
+  <p><em>NASA Space Apps Challenge 2025 project</em></p>
 </div>
 
 ---
